@@ -46,6 +46,23 @@ namespace OPListsAndObjects
                 }
             }
 
+            public void FindAndRemove(string searchEntry)
+            {
+                for(int i = 0; i < planets.Count; i++)
+                {
+                    if(planets[i].Name == searchEntry)
+                    {
+                        Console.WriteLine($"Planet {planets[i].Name} has been removed.");
+                        planets.Remove(planets[i]);
+                        break;
+                    }
+                }
+            }
+            public void CountPlanets()
+            {
+                Console.WriteLine($"There are {planets.Count} planets on the list.");
+            }
+            
         }
         static void Main(string[] args)
         {
@@ -62,14 +79,21 @@ namespace OPListsAndObjects
                 string[] tempArray = line.Split(new char[] { '$' }, StringSplitOptions.RemoveEmptyEntries);
                 string planetName = tempArray[0];
                 int planetMass = int.Parse(tempArray[1]);
-                Console.WriteLine(planetName);
-                Console.WriteLine(planetMass);
-                Console.WriteLine("----");
+               
 
                
                 newPlanetsList.AddPlanetToList(planetName, planetMass);
             }
+
             newPlanetsList.PrintPlanets();
+            newPlanetsList.CountPlanets();
+
+            newPlanetsList.PrintPlanets();
+            Console.WriteLine("What planet do you want to remove?");
+            string userInput = Console.ReadLine();
+            newPlanetsList.FindAndRemove(userInput);
+            newPlanetsList.PrintPlanets();
+
         }
     }
 }
